@@ -25,5 +25,6 @@
         };
     };
     
+    // This starts it all up. You can set a publish time here too.
     widgets.buzzedword = new ns.NewUser('buzzedword').publish();
 }(jQuery));
