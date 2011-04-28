@@ -5,8 +5,8 @@ var ns = {}, users = {};
 // @param handler | string to use as an event handler in amplify. Request, Subscribe, and Publish events are mapped to this.
 // @param user | Twitter user to create.
 
-function GetTwitterUser( selector, handler, user ) {
-    var interval, map = {}, count;
+ns.GetTwitterUser = function ( selector, handler, user ) {
+    var interval, map = {}, count, handlers = {};
 /* Constructors */    
     // This set will predefine the AJAX call and cache with whatever client side caching is available.
     amplify.request.define( handler, "ajax", {
@@ -46,7 +46,42 @@ function GetTwitterUser( selector, handler, user ) {
         clearInterval(interval);
         amplify.publish( handler, { 'destroy' : true});
     };
+    // This allows for object specific subscriptions
+    this.subscribe = function( handle, callback ) {
+        if (typeof handle == 'undefined' || typeof handle !== 'string') {
+            return 'undefined';
+        } else {
+            try {
+                if (typeof handlers[handle] !== 'undefined') {
+                    throw "Handle: " + handle + " is already defined.";
+                } else {
+                    if (typeof callback == 'function') {
+                        handlers[handle] = {
+                            'definition' : callback  
+                        };
+                        amplify.subscribe( handler, handlers[handle], callback);
+                        return callback;
+                    } else {
+                        return 'undefined';   
+                    }
+                }
+            } catch (e) {
+                // squelch   
+            }
+        }
+    };
+    // This will unsubscribe from a specific handle.
+    this.unsubscribe = function ( handle ) {
+        if (typeof handlers[handle] !== undefined) {
+            amplify.unsubscribe( handler, handlers[handle].definition);
+            delete handlers[handle];
+        }
+    };
+    // This is the public interface to see all handlers.
+    this.listSubscriptions = function() {
+        return handlers;  
+    };
 }
 
-users.buzzedword = new GetTwitterUser( $('#buzzedword'), "twitter", "buzzedword");
+users.buzzedword = new ns.GetTwitterUser( $('#buzzedword'), "twitter", "buzzedword");
 users.buzzedword.startPublishing(); /* This method also takes an interval as a parameter. */
