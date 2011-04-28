@@ -24,7 +24,7 @@ function GetTwitterUser( selector, handler, user ) {
     this.startPublishing = function( time ){
         count = 0;
         interval = setInterval(function(){
-            if (count > 19) { count = 0; amplify.publish( handler, { 'destroy' : true}); }
+            if (count > 18) { count = 0; amplify.publish( handler, { 'destroy' : true}); }
             amplify.publish( handler, { 'incoming' : map.data[count].text });
             count++;
         }, ((typeof time !== 'undefined')? time : 3000));   
