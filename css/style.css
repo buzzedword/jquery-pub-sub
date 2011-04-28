@@ -1,7 +1,5 @@
 div.widget {
-    position: relative;
-    width: 400px;
-    height: 500px;
-    margin: 0px 10px;
+    font-size: small;
+    height: 400px;
     overflow-y: scroll;
 }

@@ -7,7 +7,7 @@
             (function buildWidget( ) {
                 var element = document.createElement('div');
                     element.setAttribute('id', id);
-                    element.setAttribute('class', 'width');
+                    element.setAttribute('class', width + ' widget');
                     document.getElementById(widgets.container).appendChild(element);
             }());
             
