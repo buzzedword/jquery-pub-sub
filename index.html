@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PubSub demo</title>
+        <link href="css/style.css" rel="Stylesheet" />
+        <script src="headjs/dist/head.min.js"></script>
+        <script>
+            var amplify = {
+                core : 'amplify/core/amplify.core.js',
+                request : 'amplify/request/amplify.request.js',
+                store : 'amplify/store/amplify.store.js'
+            };
+            head.js("//code.jquery.com/jquery-latest.min.js", '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js', amplify.core, amplify.request, amplify.store, 'js/app.js');
+        </script>
+    </head>
+<body>
+    <div id="buzzedword" class="widget">
+    
+    </div>
+</body>
+</html>
