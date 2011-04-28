@@ -1,6 +1,6 @@
 (function($, undefined){
     ns.CreateNewWidget = function( id, width ){
-          var widthValue;
+          var widthValue, _this = this;
             ((typeof width == 'undefined')? width = 'grid_3' : width = width);
             widthValue = width.replace('grid_', '');
             
@@ -12,14 +12,17 @@
             }());
             
             this.destroy = function(){
-                var element = document.getElementById(id);
-                document.removeChild(element);
+                $('#' + id).remove();
             };
             
             this.value = function(){
                 return widthValue;   
             };
             
-            return $('#' + id);
+            return {
+                selector : $('#' + id),
+                destroy : _this.destroy,
+                value : _this.value
+            }
     };
 }(jQuery));
