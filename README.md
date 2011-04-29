@@ -1,18 +1,43 @@
-# README for a newly created project.
+# An experiment with Pub/Sub
 
-There are a couple of things you should do first, before you can use all of Git's power:
+This started purely as an experiment with Pub/Sub, but has grown into a class based architecture.
 
-  * Add a remote to this project: in the Cloud9 IDE command line, you can execute the following commands
-    `git remote add [remote name] [remote url (eg. 'git@github.com:/ajaxorg/node_chat')]` [Enter]
-  * Create new files inside your project
-  * Add them to to Git by executing the following command
-    `git add [file1, file2, file3, ...]` [Enter]
-  * Create a commit which can be pushed to the remote you just added
-    `git commit -m 'added new files'` [Enter]
-  * Push the commit the remote
-    `git push [remote name] master` [Enter]
+Please know, I'm perfectly aware of how inefficient this is, this is purely just fooling around and trying to mimic a compiled language on the client side.
 
-That's it! If this doesn't work for you, please visit the excellent resources from [Github.com](http://help.github.com) and the [Pro Git](http://http://progit.org/book/) book.
-If you can't find your answers there, feel free to ask us via Twitter (@cloud9ide), [mailing list](groups.google.com/group/cloud9-ide) or IRC (#cloud9ide on freenode).
+Goals for this experiment:
+  * Make sure each class is independant of siblings within the same module. 
+    Exception: classes can be dependant cross module.
+  * Expose each class to a namespace `ns`.
+  * Offer a low level, mid level, and high level API. Ensure that the low level still allows the developer to create the high level widget without additional code.
+  * Load the classes in dependancy ordering, make sure no class is loaded before its required parent.
 
-Happy coding!
+# How to use the high level API
+
+At this point, I've really only refined the high level API for usage.
+
+## Create a new user
+
+`API.newUser( **string** username, _optional_ **integer** interval );`
+This will start a new widget instance on the page with the specified user. If you specify an interval, this will set the interval at which the updates process.
+If no interval is set, interval defaults to 3000ms.
+
+## Delete a user
+
+`API.deleteUser( **string** username );`
+This removes the widget with the set username, deletes all references on the page to this user, destroys all pubsub actions associated, and deletes all keys created for the user.
+
+## Create a new subscription to user
+
+`var _myObject_ = new API.NewSubscription( **object** { 'user' : **string** username, 'handle' : **string** subscriptionLabel }, **function** callback);`
+or
+`var _myObject_ = new API.NewSubscription( **string** username, **function** callback);`
+
+`returns .destroy(), .handle();`
+
+This will allow you to create a callback to the publish event on the specified user. If you do not specify a handle, it will be automatically generated for you and can be called with the `.handle()` method.
+The high level API returns an object to represent the specific callback mapped to this request.
+
+## Delete a subscription to user
+
+`_myObject_.destroy()`
+Deletes the callback subscription associated to this object.
