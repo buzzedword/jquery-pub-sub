@@ -5,6 +5,7 @@ This started purely as an experiment with Pub/Sub, but has grown into a class ba
 Please know, I'm perfectly aware of how inefficient this is, this is purely just fooling around and trying to mimic a compiled language on the client side.
 
 Goals for this experiment:
+
   * Make sure each class is independant of siblings within the same module. 
     Exception: classes can be dependant cross module.
   * Expose each class to a namespace `ns`.
