@@ -13,7 +13,8 @@
             },
             classes = {
                 actions : {
-                    GetTwitterUser : 'js/classes/actions/GetTwitterUser.js'
+                    GetTwitterUser : 'js/classes/actions/GetTwitterUser.js',
+                    CreateNewUser : 'js/classes/actions/CreateNewUser.js'
                 },
                 models : {
                     CreateNewWidget : 'js/classes/models/CreateNewWidget.js' 
@@ -42,6 +43,7 @@
                         function(){
                             head.js(
                                 classes.actions.GetTwitterUser,
+                                classes.actions.CreateNewUser,
                                 classes.models.CreateNewWidget,
                                 function(){
                                     head.js(

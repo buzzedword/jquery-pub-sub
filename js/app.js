@@ -1,30 +1,13 @@
+var API = {};
 (function($, undefined) {
-    ns.NewUser = function( user ) {
-        var widget = ns.CreateNewWidget(user), _this = this;
-        users[user] = new ns.GetTwitterUser(widget.selector, 'ns_' + user, user);
-        
-        this.user = users[user];
-        this.widget = widget;
-        
-        this.destroy = function () {
-            users[user].stopPublishing();
-            widgets[user].widget.destroy();
-            delete users[user];
-            delete widgets[user];
-            
-        };
-        
-        return {
-            publish : function( time ) {
-                setTimeout(function(){
-                    users[user].startPublishing(((typeof time == 'undefined')? 3000 : time));
-                }, 400);
-                widgets[user] = _this;
-                return _this;
-            }
-        };
+    API.newUser = function( user, time ) {
+        ((typeof time == 'undefined')? time = 3000 : time = time);
+        widgets[user] = new ns.CreateNewUser(user).publish( time );
+        return widgets[user];
     };
-    
+    API.destroyUser = function( user ) {
+        widgets[user].destroy();
+    };
     // This starts it all up. You can set a publish time here too.
-    widgets.buzzedword = new ns.NewUser('buzzedword').publish();
+    API.newUser('buzzedword');
 }(jQuery));
