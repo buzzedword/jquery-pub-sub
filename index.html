@@ -11,6 +11,9 @@
                 request : 'amplify/request/amplify.request.js',
                 store : 'amplify/store/amplify.store.js'
             },
+            api = {
+                'public' : 'js/api/public.js'
+            },
             classes = {
                 actions : {
                     GetTwitterUser : 'js/classes/actions/GetTwitterUser.js',
@@ -57,8 +60,12 @@
                                         classes.models.CreateNewWidget,
                                         function(){
                                             head.js(
-                                                'js/app.js'
-                                            );
+                                                api['public'],
+                                                function(){
+                                                    head.js(
+                                                        'js/app.js'
+                                                    );
+                                                });
                                         });
                                 });
                         });
