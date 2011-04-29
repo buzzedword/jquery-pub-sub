@@ -18,7 +18,7 @@
         // This is a global subscription to the GetTwitterUser class actions.
         amplify.subscribe( handler, function( payload ){
             if (typeof payload.incoming !== 'undefined') {
-                selector.append('<p>' + payload.incoming + '</p>');
+                selector.prepend('<p>' + payload.incoming + '</p>').linkify();
             } else if (typeof payload.destroy !== 'undefined') {
                 selector.html('');
             }

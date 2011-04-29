@@ -25,7 +25,13 @@
             },
             jquery = {
                 core : '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js',
-                ui : '//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js'
+                ui : '//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js',
+                plugins : {
+                    linkify : 'js/classes/plugins/LinkifyTwitterUser.js'   
+                }
+            },
+            twitter = {
+                anywhere : 'http://platform.twitter.com/anywhere.js?id=PTCg18m6wjTcKE4WvUNng'  
             },
             widgets = {
                 container : 'container',
@@ -35,6 +41,7 @@
             head.js(
                 jquery.core, 
                 jquery.ui,
+                twitter.anywhere,
                 function(){
                     head.js(
                         amplify.core, 
@@ -42,13 +49,17 @@
                         amplify.store, 
                         function(){
                             head.js(
-                                classes.actions.GetTwitterUser,
-                                classes.actions.CreateNewUser,
-                                classes.models.CreateNewWidget,
+                                jquery.plugins.linkify,
                                 function(){
                                     head.js(
-                                        'js/app.js'
-                                    );
+                                        classes.actions.GetTwitterUser,
+                                        classes.actions.CreateNewUser,
+                                        classes.models.CreateNewWidget,
+                                        function(){
+                                            head.js(
+                                                'js/app.js'
+                                            );
+                                        });
                                 });
                         });
                 });
