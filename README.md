@@ -18,18 +18,22 @@ At this point, I've really only refined the high level API for usage.
 ## Create a new user
 
 `API.newUser( **string** username, _optional_ **integer** interval );`
+
 This will start a new widget instance on the page with the specified user. If you specify an interval, this will set the interval at which the updates process.
 If no interval is set, interval defaults to 3000ms.
 
 ## Delete a user
 
 `API.deleteUser( **string** username );`
+
 This removes the widget with the set username, deletes all references on the page to this user, destroys all pubsub actions associated, and deletes all keys created for the user.
 
 ## Create a new subscription to user
 
 `var _myObject_ = new API.NewSubscription( **object** { 'user' : **string** username, 'handle' : **string** subscriptionLabel }, **function** callback);`
+
 or
+
 `var _myObject_ = new API.NewSubscription( **string** username, **function** callback);`
 
 `returns .destroy(), .handle();`
@@ -40,4 +44,5 @@ The high level API returns an object to represent the specific callback mapped t
 ## Delete a subscription to user
 
 `_myObject_.destroy()`
+
 Deletes the callback subscription associated to this object.
