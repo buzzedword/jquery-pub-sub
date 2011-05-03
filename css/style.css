@@ -2,5 +2,6 @@ div.widget {
     font-size: small;
     height: 300px;
     margin-bottom: 30px;
+    white-space: normal;
     overflow-y: scroll;
 }

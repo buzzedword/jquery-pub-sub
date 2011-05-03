@@ -6,70 +6,7 @@
         <link href="css/style.css" rel="Stylesheet" />
         <script src="headjs/dist/head.min.js"></script>
         <script>
-            var amplify = {
-                core : 'amplify/core/amplify.core.js',
-                request : 'amplify/request/amplify.request.js',
-                store : 'amplify/store/amplify.store.js'
-            },
-            api = {
-                'public' : 'js/api/public.js'
-            },
-            classes = {
-                actions : {
-                    GetTwitterUser : 'js/classes/actions/GetTwitterUser.js',
-                    CreateNewUser : 'js/classes/actions/CreateNewUser.js'
-                },
-                models : {
-                    CreateNewWidget : 'js/classes/models/CreateNewWidget.js' 
-                },
-                templates : {
-                    
-                },
-            },
-            jquery = {
-                core : '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js',
-                ui : '//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js',
-                plugins : {
-                    linkify : 'js/classes/plugins/LinkifyTwitterUser.js'   
-                }
-            },
-            twitter = {
-                anywhere : 'http://platform.twitter.com/anywhere.js?id=PTCg18m6wjTcKE4WvUNng'  
-            },
-            widgets = {
-                container : 'container',
-                $container : '#container'
-            },
-            ns = {}, users = {};
-            head.js(
-                jquery.core, 
-                jquery.ui,
-                twitter.anywhere,
-                function(){
-                    head.js(
-                        amplify.core, 
-                        amplify.request, 
-                        amplify.store, 
-                        function(){
-                            head.js(
-                                jquery.plugins.linkify,
-                                function(){
-                                    head.js(
-                                        classes.actions.GetTwitterUser,
-                                        classes.actions.CreateNewUser,
-                                        classes.models.CreateNewWidget,
-                                        function(){
-                                            head.js(
-                                                api['public'],
-                                                function(){
-                                                    head.js(
-                                                        'js/app.js'
-                                                    );
-                                                });
-                                        });
-                                });
-                        });
-                });
+            head.js('js/bootstrap.js');
         </script>
     </head>
 <body>
